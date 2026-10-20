@@ -1,5 +1,5 @@
-import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+
 import Animated, {
   FadeInDown,
   LinearTransition,
@@ -14,6 +14,8 @@ type Props = {
   selectedIndex?: number | null;
   onLetterPress?: (index: number) => void;
   label?: string;
+  animate?: boolean;
+  celebrating?: boolean;
 };
 
 export function WordRow({
@@ -23,11 +25,21 @@ export function WordRow({
   selectedIndex = null,
   onLetterPress,
   label,
+  animate = true,
+  celebrating = false,
 }: Props) {
   return (
     <Animated.View
-      entering={FadeInDown.duration(260)}
-      layout={LinearTransition.duration(220)}
+      entering={
+        animate
+          ? FadeInDown.duration(280).springify().damping(19).stiffness(180)
+          : undefined
+      }
+      layout={
+        animate
+          ? LinearTransition.springify().damping(20).stiffness(180)
+          : undefined
+      }
       style={styles.container}
     >
       {label && <Text style={styles.label}>{label}</Text>}
@@ -44,6 +56,8 @@ export function WordRow({
               previousWord != null &&
               previousWord[index] !== letter
             }
+            celebrating={celebrating}
+            celebrationIndex={index}
             onPress={() => onLetterPress?.(index)}
           />
         ))}

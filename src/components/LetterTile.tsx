@@ -1,19 +1,28 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
+
 import Animated, {
-  FadeIn,
   ZoomIn,
+  interpolate,
+  interpolateColor,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
+  withSequence,
   withSpring,
+  withTiming,
 } from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 type Props = {
   letter: string;
   editable?: boolean;
   selected?: boolean;
   changed?: boolean;
+  celebrating?: boolean;
+  celebrationIndex?: number;
   onPress?: () => void;
 };
 
@@ -22,10 +31,50 @@ export function LetterTile({
   editable = false,
   selected = false,
   changed = false,
+  celebrating = false,
+  celebrationIndex = 0,
   onPress,
 }: Props) {
   const scale = useSharedValue(1);
   const lift = useSharedValue(0);
+
+  const celebration = useSharedValue(0);
+
+  useEffect(() => {
+    if (celebrating) {
+      celebration.value = withDelay(
+        celebrationIndex * 90,
+        withSequence(
+          withTiming(0.5, { duration: 130 }),
+          withTiming(1, { duration: 170 }),
+        ),
+      );
+    } else {
+      celebration.value = 0;
+    }
+  }, [celebrating, celebrationIndex, celebration]);
+
+  const celebrationStyle = useAnimatedStyle(() => {
+    const progress = celebrating ? celebration.value : 0;
+
+    return {
+      backgroundColor: interpolateColor(
+        progress,
+        [0, 1],
+        [editable ? "#FFFFFF" : changed ? "#DBEAFE" : "#E9EDF2", "#BFDBFE"],
+      ),
+      borderColor: interpolateColor(
+        progress,
+        [0, 1],
+        [editable ? "#CBD5E1" : changed ? "#BFDBFE" : "#E9EDF2", "#60A5FA"],
+      ),
+      transform: [
+        {
+          scaleX: interpolate(progress, [0, 0.5, 1], [1, 0.08, 1]),
+        },
+      ],
+    };
+  });
 
   useEffect(() => {
     scale.value = withSpring(selected ? 1.08 : 1, {
@@ -47,9 +96,9 @@ export function LetterTile({
   return (
     <Animated.View
       style={[styles.tileWrapper, animatedStyle]}
-      entering={changed ? ZoomIn.duration(220) : FadeIn.duration(120)}
+      entering={changed ? ZoomIn.duration(240).springify() : undefined}
     >
-      <Pressable
+      <AnimatedPressable
         onPress={() => {
           if (!editable) return;
           void Haptics.selectionAsync();
@@ -66,10 +115,11 @@ export function LetterTile({
           editable && styles.editable,
           changed && styles.changed,
           selected && styles.selected,
+          celebrating && celebrationStyle,
         ]}
       >
         <Text style={styles.letter}>{letter}</Text>
-      </Pressable>
+      </AnimatedPressable>
     </Animated.View>
   );
 }

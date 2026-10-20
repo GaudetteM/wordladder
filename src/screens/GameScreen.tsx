@@ -1,15 +1,12 @@
-// src/screens/GameScreen.tsx
-
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import Animated, { ZoomIn } from "react-native-reanimated";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 
 import { WordRow } from "../components/WordRow";
 import { LetterPicker } from "../components/LetterPicker";
-
 import { starterPuzzle } from "../game/puzzles";
 import { dictionary } from "../game/dictionary";
 import { validateWord } from "../game/validation";
@@ -24,7 +21,7 @@ export function GameScreen() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("Tap a letter to change it.");
 
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<React.ElementRef<typeof ScrollView>>(null);
   const shouldScrollRef = useRef(false);
 
   const previousWord = words[words.length - 1];
@@ -79,9 +76,7 @@ export function GameScreen() {
 
     const nextWord = draft;
 
-    // Scroll to the newest row after submission
     shouldScrollRef.current = true;
-
     setWords((current) => [...current, nextWord]);
     setSelectedIndex(null);
 
@@ -123,9 +118,8 @@ export function GameScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
       <View style={styles.screen}>
-        {/* HEADER */}
         <View style={styles.header}>
           <Text style={styles.eyebrow}>WORD LADDER</Text>
 
@@ -136,7 +130,6 @@ export function GameScreen() {
           </Text>
         </View>
 
-        {/* SCROLLABLE LADDER */}
         <ScrollView
           ref={scrollRef}
           style={styles.scroll}
@@ -144,9 +137,7 @@ export function GameScreen() {
           showsVerticalScrollIndicator={false}
           onContentSizeChange={() => {
             if (shouldScrollRef.current) {
-              scrollRef.current?.scrollToEnd({
-                animated: true,
-              });
+              scrollRef.current?.scrollToEnd({ animated: true });
               shouldScrollRef.current = false;
             }
           }}
@@ -171,11 +162,9 @@ export function GameScreen() {
           )}
         </ScrollView>
 
-        {/* PINNED GOAL */}
         <View style={styles.goalContainer}>
           <Text style={styles.goalLabel}>YOUR GOAL</Text>
-
-          <WordRow word={puzzle.target} />
+          <WordRow word={puzzle.target} animate={false} celebrating={won} />
         </View>
 
         {won && score && (
