@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
+import * as Haptics from "expo-haptics";
 
 type Props = {
   letter: string;
@@ -18,7 +19,12 @@ export function LetterTile({
 }: Props) {
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => {
+        if (!editable) return;
+
+        void Haptics.selectionAsync();
+        onPress?.();
+      }}
       disabled={!editable}
       accessibilityRole={editable ? "button" : "text"}
       accessibilityLabel={

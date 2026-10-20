@@ -1,5 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Animated, {
+  FadeInDown,
+  LinearTransition,
+} from "react-native-reanimated";
 
 import { LetterTile } from "./LetterTile";
 
@@ -21,7 +25,11 @@ export function WordRow({
   label,
 }: Props) {
   return (
-    <View style={styles.container}>
+    <Animated.View
+      entering={FadeInDown.duration(260)}
+      layout={LinearTransition.duration(220)}
+      style={styles.container}
+    >
       {label && <Text style={styles.label}>{label}</Text>}
 
       <View style={styles.row}>
@@ -40,7 +48,7 @@ export function WordRow({
           />
         ))}
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
