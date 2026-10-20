@@ -1,8 +1,8 @@
 // src/screens/GameScreen.tsx
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
@@ -178,9 +178,11 @@ export function GameScreen() {
           <WordRow word={puzzle.target} />
         </View>
 
-        {/* COMPLETION */}
         {won && score && (
-          <View style={styles.result}>
+          <Animated.View
+            entering={ZoomIn.duration(350).springify()}
+            style={styles.result}
+          >
             <Text style={styles.resultTitle}>Puzzle Complete!</Text>
 
             <Text style={styles.resultSubtitle}>
@@ -190,7 +192,7 @@ export function GameScreen() {
             <Text style={styles.resultEfficiency}>
               {score.efficiency}% efficiency
             </Text>
-          </View>
+          </Animated.View>
         )}
 
         {/* CONTROLS */}
