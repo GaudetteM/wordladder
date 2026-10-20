@@ -2,7 +2,8 @@ export type Puzzle = {
   id: string;
   start: string;
   target: string;
-  optimalMoves: number;
+  expectedMoves: number;
+  difficulty: "easy" | "medium" | "hard";
 };
 
 export type GameStatus = "playing" | "won";

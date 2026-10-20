@@ -3,24 +3,24 @@ export function findShortestPath(
   target: string,
   dictionary: Set<string>,
 ): string[] | null {
-  start = start.toUpperCase();
-  target = target.toUpperCase();
+  const startWord = start.trim().toLowerCase();
+  const targetWord = target.trim().toLowerCase();
 
-  if (start.length !== target.length) {
+  if (startWord.length !== targetWord.length || startWord.length === 0) {
     return null;
   }
 
-  if (start === target) {
-    return [start];
-  }
-
-  if (!dictionary.has(target)) {
+  if (!dictionary.has(startWord) || !dictionary.has(targetWord)) {
     return null;
   }
 
-  const visited = new Set<string>([start]);
+  if (startWord === targetWord) {
+    return [startWord.toUpperCase()];
+  }
+
+  const visited = new Set<string>([startWord]);
   const parents = new Map<string, string>();
-  const queue: string[] = [start];
+  const queue: string[] = [startWord];
 
   let head = 0;
 
@@ -28,7 +28,7 @@ export function findShortestPath(
     const current = queue[head++];
 
     for (let i = 0; i < current.length; i++) {
-      for (let code = 65; code <= 90; code++) {
+      for (let code = 97; code <= 122; code++) {
         const letter = String.fromCharCode(code);
 
         if (letter === current[i]) {
@@ -37,27 +37,29 @@ export function findShortestPath(
 
         const next = current.slice(0, i) + letter + current.slice(i + 1);
 
-        if (!dictionary.has(next)) {
-          continue;
-        }
-
-        if (visited.has(next)) {
+        if (!dictionary.has(next) || visited.has(next)) {
           continue;
         }
 
         visited.add(next);
         parents.set(next, current);
 
-        if (next === target) {
-          const path = [target];
-          let word = target;
+        if (next === targetWord) {
+          const path = [targetWord];
+          let word = targetWord;
 
-          while (word !== start) {
-            word = parents.get(word)!;
+          while (word !== startWord) {
+            const parent = parents.get(word);
+
+            if (parent === undefined) {
+              return null;
+            }
+
+            word = parent;
             path.push(word);
           }
 
-          return path.reverse();
+          return path.reverse().map((word) => word.toUpperCase());
         }
 
         queue.push(next);

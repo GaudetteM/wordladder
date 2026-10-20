@@ -7,15 +7,17 @@ import * as Haptics from "expo-haptics";
 
 import { WordRow } from "../components/WordRow";
 import { LetterPicker } from "../components/LetterPicker";
-import { starterPuzzle } from "../game/puzzles";
 import { dictionary } from "../game/dictionary";
 import { validateWord } from "../game/validation";
-import { findShortestPath } from "../game/solver";
+import type { Puzzle } from "../game/types";
 import { calculateScore } from "../game/scoring";
 
-export function GameScreen() {
-  const puzzle = starterPuzzle;
+type GameScreenProps = {
+  puzzle: Puzzle;
+  onNextPuzzle?: () => void;
+};
 
+export function GameScreen({ puzzle, onNextPuzzle }: GameScreenProps) {
   const [words, setWords] = useState<string[]>([puzzle.start]);
   const [draft, setDraft] = useState(puzzle.start);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -27,18 +29,9 @@ export function GameScreen() {
   const previousWord = words[words.length - 1];
   const moves = words.length - 1;
   const won = previousWord === puzzle.target;
-
-  const optimalPath = useMemo(
-    () => findShortestPath(puzzle.start, puzzle.target, dictionary),
-    [puzzle.start, puzzle.target],
-  );
-
-  const optimalMoves = optimalPath ? optimalPath.length - 1 : null;
-
   const validation = validateWord(previousWord, draft, dictionary);
 
-  const score =
-    won && optimalMoves !== null ? calculateScore(moves, optimalMoves) : null;
+  const score = won ? calculateScore(moves, puzzle.expectedMoves) : null;
 
   function handleLetterPress(index: number) {
     if (won) return;
@@ -123,7 +116,7 @@ export function GameScreen() {
         <View style={styles.header}>
           <Text style={styles.eyebrow}>WORD LADDER</Text>
 
-          <Text style={styles.title}>Puzzle 001</Text>
+          <Text style={styles.title}>Puzzle {puzzle.id.split("-").pop()}</Text>
 
           <Text style={styles.moveCount}>
             {moves} {moves === 1 ? "move" : "moves"}
@@ -175,16 +168,19 @@ export function GameScreen() {
             <Text style={styles.resultTitle}>Puzzle Complete!</Text>
 
             <Text style={styles.resultSubtitle}>
-              {score.moves} moves · {score.optimalMoves} optimal
+              {score.moves} moves · {puzzle.expectedMoves} expected
             </Text>
 
             <Text style={styles.resultEfficiency}>
-              {score.efficiency}% efficiency
+              {score.extraMoves === 0
+                ? "Perfect!"
+                : `+${score.extraMoves} extra ${
+                    score.extraMoves === 1 ? "move" : "moves"
+                  }`}
             </Text>
           </Animated.View>
         )}
 
-        {/* CONTROLS */}
         <View style={styles.controls}>
           {!won && (
             <>
@@ -226,6 +222,12 @@ export function GameScreen() {
                 >
                   Undo
                 </Text>
+              </Pressable>
+            )}
+
+            {won && onNextPuzzle && (
+              <Pressable onPress={onNextPuzzle} accessibilityRole="button">
+                <Text style={styles.actionText}>Next Puzzle →</Text>
               </Pressable>
             )}
 
