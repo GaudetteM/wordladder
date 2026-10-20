@@ -26,16 +26,17 @@ export function validateWord(
   candidate: string,
   dictionary: Set<string>,
 ): ValidationResult {
-  const word = candidate.toUpperCase();
+  const previousWord = previous.toLowerCase().trim();
+  const word = candidate.toLowerCase().trim();
 
-  if (word.length !== previous.length) {
+  if (word.length !== previousWord.length) {
     return {
       valid: false,
       reason: "Word length must stay the same.",
     };
   }
 
-  if (countDifferences(previous, word) !== 1) {
+  if (countDifferences(previousWord, word) !== 1) {
     return {
       valid: false,
       reason: "Change exactly one letter.",
