@@ -33,6 +33,7 @@ export function GameScreen({
 
   const scrollRef = useRef<React.ElementRef<typeof ScrollView>>(null);
   const shouldScrollRef = useRef(false);
+  const pendingSave = useRef<Promise<void> | null>(null);
 
   const previousWord = words[words.length - 1];
   const moves = words.length - 1;
@@ -66,6 +67,14 @@ export function GameScreen({
     setMessage(result.valid ? "Valid word! Ready to submit." : result.reason);
   }
 
+  async function navigateAfterSave(callback: () => void) {
+    if (pendingSave.current) {
+      await pendingSave.current;
+    }
+
+    callback();
+  }
+
   function handleSubmit() {
     const result = validateWord(previousWord, draft, dictionary);
 
@@ -84,11 +93,12 @@ export function GameScreen({
     if (nextWord === puzzle.target) {
       const finalScore = calculateScore(moves + 1, puzzle.expectedMoves);
 
-      void savePuzzleCompletion(progressId ?? puzzle.id, finalScore).catch(
-        (error) => {
-          console.error("Failed to save puzzle completion:", error);
-        },
-      );
+      pendingSave.current = savePuzzleCompletion(
+        progressId ?? puzzle.id,
+        finalScore,
+      ).catch((error) => {
+        console.error("Failed to save puzzle completion:", error);
+      });
 
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setMessage("Puzzle complete!");
@@ -132,7 +142,10 @@ export function GameScreen({
         <View style={styles.header}>
           <Text style={styles.eyebrow}>WORD LADDER</Text>
 
-          <Pressable onPress={onBack} style={styles.backButton}>
+          <Pressable
+            onPress={() => void navigateAfterSave(onBack)}
+            style={styles.backButton}
+          >
             <Text style={styles.backText}>‹ Puzzle List</Text>
           </Pressable>
 
@@ -250,7 +263,10 @@ export function GameScreen({
             </Pressable>
 
             {won && onNextPuzzle && (
-              <Pressable onPress={onNextPuzzle} accessibilityRole="button">
+              <Pressable
+                onPress={() => void navigateAfterSave(onNextPuzzle)}
+                accessibilityRole="button"
+              >
                 <Text style={styles.actionText}>Next Puzzle →</Text>
               </Pressable>
             )}
