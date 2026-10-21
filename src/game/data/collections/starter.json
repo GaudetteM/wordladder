@@ -1,0 +1,112 @@
+[
+  {
+    "id": "starter-001",
+    "start": "THAT",
+    "target": "THEY",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["THAT", "THAN", "THEN", "THEY"],
+    "averageWordFrequency": 6.43,
+    "weakestWordFrequency": 6.07,
+    "score": 6.559
+  },
+  {
+    "id": "starter-002",
+    "start": "WHAT",
+    "target": "THEN",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["WHAT", "THAT", "THAN", "THEN"],
+    "averageWordFrequency": 6.4,
+    "weakestWordFrequency": 6.07,
+    "score": 6.329
+  },
+  {
+    "id": "starter-003",
+    "start": "THIS",
+    "target": "WHEN",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["THIS", "THIN", "THEN", "WHEN"],
+    "averageWordFrequency": 5.93,
+    "weakestWordFrequency": 4.47,
+    "score": 6.197
+  },
+  {
+    "id": "starter-004",
+    "start": "HAVE",
+    "target": "SOME",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["HAVE", "SAVE", "SAME", "SOME"],
+    "averageWordFrequency": 5.96,
+    "weakestWordFrequency": 5.14,
+    "score": 6.159
+  },
+  {
+    "id": "starter-005",
+    "start": "LIKE",
+    "target": "MADE",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["LIKE", "LAKE", "MAKE", "MADE"],
+    "averageWordFrequency": 5.81,
+    "weakestWordFrequency": 4.83,
+    "score": 5.952
+  },
+  {
+    "id": "starter-006",
+    "start": "WILL",
+    "target": "HELP",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["WILL", "WELL", "HELL", "HELP"],
+    "averageWordFrequency": 5.83,
+    "weakestWordFrequency": 5.1,
+    "score": 5.939
+  },
+  {
+    "id": "starter-007",
+    "start": "BEEN",
+    "target": "THEM",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["BEEN", "TEEN", "THEN", "THEM"],
+    "averageWordFrequency": 5.72,
+    "weakestWordFrequency": 4.33,
+    "score": 5.921
+  },
+  {
+    "id": "starter-008",
+    "start": "JUST",
+    "target": "POST",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["JUST", "MUST", "MOST", "POST"],
+    "averageWordFrequency": 5.88,
+    "weakestWordFrequency": 5.43,
+    "score": 5.903
+  },
+  {
+    "id": "starter-009",
+    "start": "MAKE",
+    "target": "LIFE",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["MAKE", "LAKE", "LIKE", "LIFE"],
+    "averageWordFrequency": 5.8,
+    "weakestWordFrequency": 4.83,
+    "score": 5.875
+  },
+  {
+    "id": "starter-010",
+    "start": "MORE",
+    "target": "LIVE",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": ["MORE", "MOVE", "LOVE", "LIVE"],
+    "averageWordFrequency": 5.77,
+    "weakestWordFrequency": 5.35,
+    "score": 5.841
+  }
+]

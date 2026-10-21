@@ -11,13 +11,15 @@ import { dictionary } from "../game/dictionary";
 import { validateWord } from "../game/validation";
 import type { Puzzle } from "../game/types";
 import { calculateScore } from "../game/scoring";
+import { savePuzzleCompletion } from "../game/progress";
 
 type GameScreenProps = {
   puzzle: Puzzle;
   onNextPuzzle?: () => void;
+  onBack: () => void;
 };
 
-export function GameScreen({ puzzle, onNextPuzzle }: GameScreenProps) {
+export function GameScreen({ puzzle, onNextPuzzle, onBack }: GameScreenProps) {
   const [words, setWords] = useState<string[]>([puzzle.start]);
   const [draft, setDraft] = useState(puzzle.start);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -74,6 +76,12 @@ export function GameScreen({ puzzle, onNextPuzzle }: GameScreenProps) {
     setSelectedIndex(null);
 
     if (nextWord === puzzle.target) {
+      const finalScore = calculateScore(moves + 1, puzzle.expectedMoves);
+
+      void savePuzzleCompletion(puzzle.id, finalScore).catch((error) => {
+        console.error("Failed to save puzzle completion:", error);
+      });
+
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setMessage("Puzzle complete!");
     } else {
@@ -115,6 +123,10 @@ export function GameScreen({ puzzle, onNextPuzzle }: GameScreenProps) {
       <View style={styles.screen}>
         <View style={styles.header}>
           <Text style={styles.eyebrow}>WORD LADDER</Text>
+
+          <Pressable onPress={onBack} style={styles.backButton}>
+            <Text style={styles.backText}>‹ Puzzle List</Text>
+          </Pressable>
 
           <Text style={styles.title}>Puzzle {puzzle.id.split("-").pop()}</Text>
 
@@ -225,15 +237,15 @@ export function GameScreen({ puzzle, onNextPuzzle }: GameScreenProps) {
               </Pressable>
             )}
 
+            <Pressable onPress={handleReset} accessibilityRole="button">
+              <Text style={styles.actionText}>Restart</Text>
+            </Pressable>
+
             {won && onNextPuzzle && (
               <Pressable onPress={onNextPuzzle} accessibilityRole="button">
                 <Text style={styles.actionText}>Next Puzzle →</Text>
               </Pressable>
             )}
-
-            <Pressable onPress={handleReset} accessibilityRole="button">
-              <Text style={styles.actionText}>Restart</Text>
-            </Pressable>
           </View>
         </View>
       </View>
@@ -254,6 +266,18 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     paddingBottom: 16,
     gap: 5,
+  },
+  backButton: {
+    position: "absolute",
+    left: 16,
+    top: 12,
+    zIndex: 1,
+    paddingVertical: 8,
+  },
+  backText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#477BDB",
   },
   eyebrow: {
     fontSize: 11,
