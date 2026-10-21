@@ -1,0 +1,23 @@
+[
+  {
+    "id": "daily-001",
+    "start": "HEAD",
+    "target": "TAIL",
+    "expectedMoves": 4,
+    "difficulty": "easy"
+  },
+  {
+    "id": "daily-002",
+    "start": "FIRE",
+    "target": "WIND",
+    "expectedMoves": 5,
+    "difficulty": "medium"
+  },
+  {
+    "id": "daily-003",
+    "start": "DARK",
+    "target": "LAMP",
+    "expectedMoves": 5,
+    "difficulty": "medium"
+  }
+]

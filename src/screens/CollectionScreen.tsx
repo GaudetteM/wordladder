@@ -39,6 +39,15 @@ export function CollectionScreen({
     };
   }, []);
 
+  const completedCount = collection.puzzles.filter(
+    (puzzle) => progress[puzzle.id]?.completed,
+  ).length;
+
+  const totalCount = collection.puzzles.length;
+
+  const completionPercent =
+    totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+
   const horizontalPadding = 20;
   const gap = 12;
   const cardWidth = (width - horizontalPadding * 2 - gap) / 2;
@@ -61,12 +70,30 @@ export function CollectionScreen({
             Pick a ladder and find your way to the goal.
           </Text>
 
-          <View style={styles.summaryRow}>
-            <Text style={styles.count}>
-              {collection.puzzles.length} puzzles
-            </Text>
-            <View style={styles.dot} />
-            <Text style={styles.count}>All difficulties</Text>
+          <View style={styles.progressSection}>
+            <View style={styles.progressLabels}>
+              <Text style={styles.progressTitle}>Collection Progress</Text>
+              <Text style={styles.progressCount}>
+                {completedCount} / {totalCount} completed
+              </Text>
+            </View>
+
+            <View
+              style={styles.progressTrack}
+              accessibilityRole="progressbar"
+              accessibilityValue={{
+                min: 0,
+                max: totalCount,
+                now: completedCount,
+              }}
+            >
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${completionPercent}%` },
+                ]}
+              />
+            </View>
           </View>
         </View>
 
@@ -193,6 +220,36 @@ const styles = StyleSheet.create({
     height: 4,
     borderRadius: 2,
     backgroundColor: "#CBD5E1",
+  },
+  progressSection: {
+    marginTop: 14,
+    gap: 10,
+  },
+  progressLabels: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  progressTitle: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#475569",
+  },
+  progressCount: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#64748B",
+  },
+  progressTrack: {
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: "#E2E8F0",
+    overflow: "hidden",
+  },
+  progressFill: {
+    height: "100%",
+    borderRadius: 4,
+    backgroundColor: "#477BDB",
   },
   grid: {
     flexDirection: "row",

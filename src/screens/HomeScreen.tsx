@@ -1,12 +1,34 @@
-import React from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { collections } from "../game/catalog";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { getRecentDailyPuzzles } from "../game/daily";
+import { getProgress, type ProgressMap } from "../game/progress";
+import { useEffect, useState } from "react";
 
 type HomeScreenProps = {
   onSelectCollection: (collectionId: string) => void;
+  onSelectDaily: (date: string) => void;
 };
 
-export function HomeScreen({ onSelectCollection }: HomeScreenProps) {
+export function HomeScreen({
+  onSelectCollection,
+  onSelectDaily,
+}: HomeScreenProps) {
+  const dailyPuzzles = getRecentDailyPuzzles();
+  const [progress, setProgress] = useState<ProgressMap>({});
+
+  useEffect(() => {
+    let active = true;
+
+    getProgress().then((savedProgress) => {
+      if (active) setProgress(savedProgress);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.screen}>
@@ -19,6 +41,63 @@ export function HomeScreen({ onSelectCollection }: HomeScreenProps) {
         </View>
 
         <View style={styles.section}>
+          <View style={styles.dailySection}>
+            <View style={styles.dailyHeader}>
+              <Text style={styles.sectionTitle}>Daily Puzzles</Text>
+              <Text style={styles.dailySubtitle}>Today + previous 6 days</Text>
+            </View>
+
+            <View style={styles.dailyGrid}>
+              {dailyPuzzles.map((entry) => {
+                const date = new Date(`${entry.date}T12:00:00`);
+                const dailyProgress = progress[`daily:${entry.date}`];
+
+                return (
+                  <Pressable
+                    key={entry.date}
+                    onPress={() => onSelectDaily(entry.date)}
+                    style={[
+                      styles.dailyCard,
+                      entry.isToday && styles.dailyCardToday,
+                    ]}
+                    accessibilityRole="button"
+                  >
+                    <Text style={styles.dailyWeekday}>
+                      {date.toLocaleDateString("en-US", { weekday: "short" })}
+                    </Text>
+
+                    <Text style={styles.dailyDay}>{date.getDate()}</Text>
+
+                    <Text
+                      style={[
+                        styles.dailyStatus,
+                        dailyProgress?.bestMedal === "gold" && styles.goldText,
+                        dailyProgress?.bestMedal === "silver" &&
+                          styles.silverText,
+                        dailyProgress?.bestMedal === "bronze" &&
+                          styles.bronzeText,
+                        dailyProgress?.bestMedal === "complete" &&
+                          styles.dailyCompleted,
+                      ]}
+                    >
+                      {dailyProgress?.bestMedal === "gold"
+                        ? "★★★"
+                        : dailyProgress?.bestMedal === "silver"
+                          ? "★★"
+                          : dailyProgress?.bestMedal === "bronze"
+                            ? "★"
+                            : dailyProgress?.completed
+                              ? "✓"
+                              : entry.isToday
+                                ? "TODAY"
+                                : "PLAY"}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
+
           <Text style={styles.sectionTitle}>Collections</Text>
 
           {collections.map((collection) => (
@@ -88,6 +167,64 @@ const styles = StyleSheet.create({
   },
   section: {
     gap: 14,
+  },
+  dailySection: {
+    gap: 14,
+    marginBottom: 30,
+  },
+  dailyHeader: {
+    gap: 4,
+  },
+  dailySubtitle: {
+    fontSize: 12,
+    color: "#64748B",
+  },
+  dailyGrid: {
+    flexDirection: "row",
+    gap: 6,
+  },
+  dailyCard: {
+    flex: 1,
+    minWidth: 0,
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 2,
+    borderRadius: 12,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    gap: 6,
+  },
+  dailyCardToday: {
+    backgroundColor: "#EFF6FF",
+    borderColor: "#477BDB",
+  },
+  dailyWeekday: {
+    fontSize: 10,
+    fontWeight: "600",
+    color: "#64748B",
+  },
+  dailyDay: {
+    fontSize: 17,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  dailyCompleted: {
+    color: "#2563EB",
+  },
+  dailyStatus: {
+    fontSize: 9,
+    fontWeight: "800",
+    color: "#477BDB",
+  },
+  goldText: {
+    color: "#D97706",
+  },
+  silverText: {
+    color: "#64748B",
+  },
+  bronzeText: {
+    color: "#B45309",
   },
   sectionTitle: {
     fontSize: 18,

@@ -15,11 +15,17 @@ import { savePuzzleCompletion } from "../game/progress";
 
 type GameScreenProps = {
   puzzle: Puzzle;
+  progressId?: string;
   onNextPuzzle?: () => void;
   onBack: () => void;
 };
 
-export function GameScreen({ puzzle, onNextPuzzle, onBack }: GameScreenProps) {
+export function GameScreen({
+  puzzle,
+  progressId,
+  onNextPuzzle,
+  onBack,
+}: GameScreenProps) {
   const [words, setWords] = useState<string[]>([puzzle.start]);
   const [draft, setDraft] = useState(puzzle.start);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -78,9 +84,11 @@ export function GameScreen({ puzzle, onNextPuzzle, onBack }: GameScreenProps) {
     if (nextWord === puzzle.target) {
       const finalScore = calculateScore(moves + 1, puzzle.expectedMoves);
 
-      void savePuzzleCompletion(puzzle.id, finalScore).catch((error) => {
-        console.error("Failed to save puzzle completion:", error);
-      });
+      void savePuzzleCompletion(progressId ?? puzzle.id, finalScore).catch(
+        (error) => {
+          console.error("Failed to save puzzle completion:", error);
+        },
+      );
 
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setMessage("Puzzle complete!");

@@ -5,15 +5,14 @@ import { HomeScreen } from "./src/screens/HomeScreen";
 import { CollectionScreen } from "./src/screens/CollectionScreen";
 import { GameScreen } from "./src/screens/GameScreen";
 import { getCollectionById, getPuzzleById } from "./src/game/catalog";
+import { getRecentDailyPuzzles } from "./src/game/daily";
+import { getDailyPuzzle } from "./src/game/daily";
 
 type Screen =
   | { name: "home" }
   | { name: "collection"; collectionId: string }
-  | {
-      name: "game";
-      collectionId: string;
-      puzzleId: string;
-    };
+  | { name: "game"; collectionId: string; puzzleId: string }
+  | { name: "daily"; date: string };
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>({ name: "home" });
@@ -26,12 +25,18 @@ export default function App() {
     setScreen({ name: "game", collectionId, puzzleId });
   }
 
+  function openDaily(date: string) {
+    setScreen({ name: "daily", date });
+  }
+
   function returnToCollection(collectionId: string) {
     setScreen({ name: "collection", collectionId });
   }
 
   const collection =
-    screen.name === "home" ? undefined : getCollectionById(screen.collectionId);
+    screen.name === "collection" || screen.name === "game"
+      ? getCollectionById(screen.collectionId)
+      : undefined;
 
   const puzzle =
     screen.name === "game" ? getPuzzleById(screen.puzzleId) : undefined;
@@ -39,8 +44,27 @@ export default function App() {
   return (
     <SafeAreaProvider>
       {screen.name === "home" && (
-        <HomeScreen onSelectCollection={openCollection} />
+        <HomeScreen
+          onSelectCollection={openCollection}
+          onSelectDaily={openDaily}
+        />
       )}
+
+      {screen.name === "daily" &&
+        (() => {
+          const puzzle = getDailyPuzzle(screen.date);
+
+          if (!puzzle) return null;
+
+          return (
+            <GameScreen
+              key={`daily-${screen.date}`}
+              puzzle={puzzle}
+              progressId={`daily:${screen.date}`}
+              onBack={() => setScreen({ name: "home" })}
+            />
+          );
+        })()}
 
       {screen.name === "collection" && collection && (
         <CollectionScreen
