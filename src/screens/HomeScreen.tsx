@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getRecentDailyPuzzles } from "../game/daily";
 import { getProgress, type ProgressMap } from "../game/progress";
 import { useEffect, useState } from "react";
+import CollectionCard from "../components/CollectionsCard";
 
 type HomeScreenProps = {
   onSelectCollection: (collectionId: string) => void;
@@ -101,33 +102,26 @@ export function HomeScreen({
           <Text style={styles.sectionTitle}>Collections</Text>
 
           {collections.map((collection) => (
-            <Pressable
+            <CollectionCard
               key={collection.id}
+              collection={collection}
+              progress={progress}
               onPress={() => onSelectCollection(collection.id)}
-              style={({ pressed }) => [
-                styles.collectionCard,
-                pressed && styles.cardPressed,
-              ]}
-              accessibilityRole="button"
-            >
-              <View style={styles.cardContent}>
-                <View style={styles.cardHeading}>
-                  <Text style={styles.cardTitle}>{collection.title}</Text>
-                  <Text style={styles.badge}>FREE</Text>
-                </View>
-
-                <Text style={styles.cardDescription}>
-                  {collection.description}
-                </Text>
-
-                <Text style={styles.cardFooter}>
-                  {collection.puzzles.length} puzzles
-                </Text>
-              </View>
-
-              <Text style={styles.arrow}>›</Text>
-            </Pressable>
+            />
           ))}
+
+          <CollectionCard
+            key="locked-preview"
+            collection={{
+              id: "locked-preview",
+              title: "Daily Challenges",
+              description: "Tougher ladders. Bigger bragging rights.",
+              unlockType: "paid",
+              puzzles: [],
+            }}
+            progress={progress}
+            onPress={() => {}}
+          />
         </View>
       </View>
     </SafeAreaView>
