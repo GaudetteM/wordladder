@@ -1,8 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import { LockKeyhole } from "lucide-react-native";
+
 import type { PuzzleCollection } from "../game/types";
 import type { ProgressMap } from "../game/progress";
-import { LockKeyhole } from "lucide-react-native";
+import { getCollectionMastery } from "../game/mastery";
 
 type CollectionCardProps = {
   collection: PuzzleCollection;
@@ -20,6 +22,7 @@ export default function CollectionCard({
     (puzzle) => progress[puzzle.id]?.completed,
   ).length;
 
+  const mastery = getCollectionMastery(collection, progress);
   const totalCount = collection.puzzles.length;
   const progressPercent =
     totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
@@ -85,6 +88,13 @@ export default function CollectionCard({
               <View
                 style={[styles.progressFill, { width: `${progressPercent}%` }]}
               />
+            </View>
+
+            <View style={styles.masteryRow}>
+              <Text style={styles.masteryStars}>★</Text>
+              <Text style={styles.masteryText}>
+                {mastery.earnedStars} / {mastery.possibleStars} stars
+              </Text>
             </View>
           </View>
         )}
@@ -157,7 +167,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: "#E2E8F0",
   },
-
   lockedBadgeText: {
     fontSize: 10,
     fontWeight: "800",
@@ -203,5 +212,20 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: "#94A3B8",
     marginLeft: 12,
+  },
+  masteryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    marginTop: 4,
+  },
+  masteryStars: {
+    fontSize: 15,
+    color: "#D97706",
+  },
+  masteryText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#64748B",
   },
 });

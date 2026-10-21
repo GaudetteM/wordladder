@@ -12,6 +12,7 @@ import type { PuzzleCollection } from "../game/types";
 import { getProgress, type ProgressMap } from "../game/progress";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PuzzleCard from "../components/PuzzleCard";
+import { getCollectionMastery } from "../game/mastery";
 
 type CollectionScreenProps = {
   collection: PuzzleCollection;
@@ -48,6 +49,7 @@ export function CollectionScreen({
 
   const completionPercent =
     totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+  const mastery = getCollectionMastery(collection, progress);
 
   const horizontalPadding = 20;
   const gap = 10;
@@ -94,6 +96,13 @@ export function CollectionScreen({
                   { width: `${completionPercent}%` },
                 ]}
               />
+            </View>
+
+            <View style={styles.masteryRow}>
+              <Text style={styles.masteryStars}>★</Text>
+              <Text style={styles.masteryText}>
+                {mastery.earnedStars} / {mastery.possibleStars} stars
+              </Text>
             </View>
           </View>
         </View>
@@ -195,5 +204,20 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     gap: 10,
     paddingBottom: 28,
+  },
+  masteryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: 2,
+  },
+  masteryStars: {
+    fontSize: 16,
+    color: "#D97706",
+  },
+  masteryText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#64748B",
   },
 });
