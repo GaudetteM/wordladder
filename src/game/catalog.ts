@@ -1,15 +1,24 @@
 import starterData from "./data/collections/starter.json";
+import challengeData from "./data/collections/challenge.json";
 import type { Puzzle, PuzzleCollection } from "./types";
 
 const starterPuzzles = starterData as Puzzle[];
+const challengePuzzles = challengeData as Puzzle[];
 
 export const collections: PuzzleCollection[] = [
   {
     id: "starter",
-    title: "Starter Group",
-    description: "10 easy puzzles to get you started.",
+    title: "Starter Collection",
+    description: "20 approachable puzzles to get you started.",
     unlockType: "free",
     puzzles: starterPuzzles,
+  },
+  {
+    id: "challenge",
+    title: "The Challenge",
+    description: "20 tougher puzzles to test your word skills.",
+    unlockType: "free",
+    puzzles: challengePuzzles,
   },
 ];
 

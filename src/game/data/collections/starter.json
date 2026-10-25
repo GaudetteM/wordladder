@@ -5,108 +5,332 @@
     "target": "THEY",
     "expectedMoves": 3,
     "difficulty": "easy",
-    "route": ["THAT", "THAN", "THEN", "THEY"],
+    "route": [
+      "THAT",
+      "THAN",
+      "THEN",
+      "THEY"
+    ],
     "averageWordFrequency": 6.43,
     "weakestWordFrequency": 6.07,
     "score": 6.559
   },
   {
     "id": "starter-002",
-    "start": "WHAT",
-    "target": "THEN",
-    "expectedMoves": 3,
-    "difficulty": "easy",
-    "route": ["WHAT", "THAT", "THAN", "THEN"],
-    "averageWordFrequency": 6.4,
-    "weakestWordFrequency": 6.07,
-    "score": 6.329
-  },
-  {
-    "id": "starter-003",
-    "start": "THIS",
-    "target": "WHEN",
-    "expectedMoves": 3,
-    "difficulty": "easy",
-    "route": ["THIS", "THIN", "THEN", "WHEN"],
-    "averageWordFrequency": 5.93,
-    "weakestWordFrequency": 4.47,
-    "score": 6.197
-  },
-  {
-    "id": "starter-004",
-    "start": "HAVE",
-    "target": "SOME",
-    "expectedMoves": 3,
-    "difficulty": "easy",
-    "route": ["HAVE", "SAVE", "SAME", "SOME"],
-    "averageWordFrequency": 5.96,
-    "weakestWordFrequency": 5.14,
-    "score": 6.159
-  },
-  {
-    "id": "starter-005",
-    "start": "LIKE",
-    "target": "MADE",
-    "expectedMoves": 3,
-    "difficulty": "easy",
-    "route": ["LIKE", "LAKE", "MAKE", "MADE"],
-    "averageWordFrequency": 5.81,
-    "weakestWordFrequency": 4.83,
-    "score": 5.952
-  },
-  {
-    "id": "starter-006",
     "start": "WILL",
     "target": "HELP",
     "expectedMoves": 3,
     "difficulty": "easy",
-    "route": ["WILL", "WELL", "HELL", "HELP"],
+    "route": [
+      "WILL",
+      "WELL",
+      "HELL",
+      "HELP"
+    ],
     "averageWordFrequency": 5.83,
     "weakestWordFrequency": 5.1,
     "score": 5.939
   },
   {
-    "id": "starter-007",
-    "start": "BEEN",
-    "target": "THEM",
-    "expectedMoves": 3,
-    "difficulty": "easy",
-    "route": ["BEEN", "TEEN", "THEN", "THEM"],
-    "averageWordFrequency": 5.72,
-    "weakestWordFrequency": 4.33,
-    "score": 5.921
+    "id": "starter-003",
+    "start": "WHEN",
+    "target": "THUS",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "WHEN",
+      "THEN",
+      "THIN",
+      "THIS",
+      "THUS"
+    ],
+    "averageWordFrequency": 5.73,
+    "weakestWordFrequency": 4.47,
+    "score": 5.693
   },
   {
-    "id": "starter-008",
+    "id": "starter-004",
+    "start": "WANT",
+    "target": "BEST",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": [
+      "WANT",
+      "WENT",
+      "WEST",
+      "BEST"
+    ],
+    "averageWordFrequency": 5.67,
+    "weakestWordFrequency": 5.29,
+    "score": 5.776
+  },
+  {
+    "id": "starter-005",
+    "start": "THING",
+    "target": "CHECK",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "THING",
+      "THINK",
+      "THICK",
+      "CHICK",
+      "CHECK"
+    ],
+    "averageWordFrequency": 5.13,
+    "weakestWordFrequency": 4.08,
+    "score": 5.284
+  },
+  {
+    "id": "starter-006",
     "start": "JUST",
     "target": "POST",
     "expectedMoves": 3,
     "difficulty": "easy",
-    "route": ["JUST", "MUST", "MOST", "POST"],
+    "route": [
+      "JUST",
+      "MUST",
+      "MOST",
+      "POST"
+    ],
     "averageWordFrequency": 5.88,
     "weakestWordFrequency": 5.43,
     "score": 5.903
   },
   {
-    "id": "starter-009",
-    "start": "MAKE",
-    "target": "LIFE",
+    "id": "starter-007",
+    "start": "THERE",
+    "target": "CLOSE",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "THERE",
+      "THESE",
+      "THOSE",
+      "CHOSE",
+      "CLOSE"
+    ],
+    "averageWordFrequency": 5.63,
+    "weakestWordFrequency": 4.55,
+    "score": 5.713
+  },
+  {
+    "id": "starter-008",
+    "start": "GOOD",
+    "target": "WORK",
     "expectedMoves": 3,
     "difficulty": "easy",
-    "route": ["MAKE", "LAKE", "LIKE", "LIFE"],
-    "averageWordFrequency": 5.8,
-    "weakestWordFrequency": 4.83,
-    "score": 5.875
+    "route": [
+      "GOOD",
+      "WOOD",
+      "WORD",
+      "WORK"
+    ],
+    "averageWordFrequency": 5.53,
+    "weakestWordFrequency": 4.78,
+    "score": 5.734
+  },
+  {
+    "id": "starter-009",
+    "start": "YOUR",
+    "target": "GOOD",
+    "expectedMoves": 5,
+    "difficulty": "medium",
+    "route": [
+      "YOUR",
+      "FOUR",
+      "FOUL",
+      "FOOL",
+      "FOOD",
+      "GOOD"
+    ],
+    "averageWordFrequency": 5.32,
+    "weakestWordFrequency": 4.05,
+    "score": 5.722
   },
   {
     "id": "starter-010",
+    "start": "BEEN",
+    "target": "YEAR",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": [
+      "BEEN",
+      "BEER",
+      "BEAR",
+      "YEAR"
+    ],
+    "averageWordFrequency": 5.41,
+    "weakestWordFrequency": 4.7,
+    "score": 5.692
+  },
+  {
+    "id": "starter-011",
+    "start": "WITH",
+    "target": "SIDE",
+    "expectedMoves": 4,
+    "difficulty": "easy",
+    "route": [
+      "WITH",
+      "WISH",
+      "WISE",
+      "WIDE",
+      "SIDE"
+    ],
+    "averageWordFrequency": 5.4,
+    "weakestWordFrequency": 4.51,
+    "score": 5.71
+  },
+  {
+    "id": "starter-012",
+    "start": "PLACE",
+    "target": "START",
+    "expectedMoves": 5,
+    "difficulty": "medium",
+    "route": [
+      "PLACE",
+      "PLATE",
+      "SLATE",
+      "STATE",
+      "STARE",
+      "START"
+    ],
+    "averageWordFrequency": 4.89,
+    "weakestWordFrequency": 3.82,
+    "score": 5.187
+  },
+  {
+    "id": "starter-013",
+    "start": "LAST",
+    "target": "LOVE",
+    "expectedMoves": 3,
+    "difficulty": "easy",
+    "route": [
+      "LAST",
+      "LOST",
+      "LOSE",
+      "LOVE"
+    ],
+    "averageWordFrequency": 5.54,
+    "weakestWordFrequency": 5.08,
+    "score": 5.659
+  },
+  {
+    "id": "starter-014",
+    "start": "COME",
+    "target": "LAST",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "COME",
+      "CAME",
+      "CASE",
+      "CAST",
+      "LAST"
+    ],
+    "averageWordFrequency": 5.5,
+    "weakestWordFrequency": 4.79,
+    "score": 5.626
+  },
+  {
+    "id": "starter-015",
     "start": "MORE",
+    "target": "GIVE",
+    "expectedMoves": 4,
+    "difficulty": "easy",
+    "route": [
+      "MORE",
+      "MOVE",
+      "LOVE",
+      "LIVE",
+      "GIVE"
+    ],
+    "averageWordFrequency": 5.76,
+    "weakestWordFrequency": 5.35,
+    "score": 5.868
+  },
+  {
+    "id": "starter-016",
+    "start": "WORK",
+    "target": "MADE",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "WORK",
+      "WORE",
+      "MORE",
+      "MODE",
+      "MADE"
+    ],
+    "averageWordFrequency": 5.43,
+    "weakestWordFrequency": 4.29,
+    "score": 5.635
+  },
+  {
+    "id": "starter-017",
+    "start": "TAKE",
     "target": "LIVE",
     "expectedMoves": 3,
     "difficulty": "easy",
-    "route": ["MORE", "MOVE", "LOVE", "LIVE"],
-    "averageWordFrequency": 5.77,
-    "weakestWordFrequency": 5.35,
-    "score": 5.841
+    "route": [
+      "TAKE",
+      "LAKE",
+      "LIKE",
+      "LIVE"
+    ],
+    "averageWordFrequency": 5.67,
+    "weakestWordFrequency": 4.83,
+    "score": 5.697
+  },
+  {
+    "id": "starter-018",
+    "start": "WITH",
+    "target": "WERE",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "WITH",
+      "WISH",
+      "WISE",
+      "WIRE",
+      "WERE"
+    ],
+    "averageWordFrequency": 5.46,
+    "weakestWordFrequency": 4.43,
+    "score": 5.915
+  },
+  {
+    "id": "starter-019",
+    "start": "GIVE",
+    "target": "MAKE",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "GIVE",
+      "LIVE",
+      "LIKE",
+      "LAKE",
+      "MAKE"
+    ],
+    "averageWordFrequency": 5.71,
+    "weakestWordFrequency": 4.83,
+    "score": 5.786
+  },
+  {
+    "id": "starter-020",
+    "start": "THEY",
+    "target": "KEEP",
+    "expectedMoves": 4,
+    "difficulty": "medium",
+    "route": [
+      "THEY",
+      "THEN",
+      "TEEN",
+      "KEEN",
+      "KEEP"
+    ],
+    "averageWordFrequency": 5.34,
+    "weakestWordFrequency": 4.13,
+    "score": 5.635
   }
 ]

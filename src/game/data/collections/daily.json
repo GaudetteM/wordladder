@@ -3,21 +3,24 @@
     "id": "daily-001",
     "start": "HEAD",
     "target": "TAIL",
-    "expectedMoves": 4,
-    "difficulty": "easy"
+    "expectedMoves": 5,
+    "difficulty": "easy",
+    "route": ["HEAD", "HEAL", "TEAL", "TELL", "TALL", "TAIL"]
   },
   {
     "id": "daily-002",
     "start": "FIRE",
     "target": "WIND",
     "expectedMoves": 5,
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "route": ["FIRE", "FINE", "WINE", "WINS", "WING", "WIND"]
   },
   {
     "id": "daily-003",
     "start": "DARK",
     "target": "LAMP",
     "expectedMoves": 5,
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "route": ["DARK", "DARE", "DAME", "NAME", "LAME", "LAMP"]
   }
 ]

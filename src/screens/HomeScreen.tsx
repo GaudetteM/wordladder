@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { collections } from "../game/catalog";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getRecentDailyPuzzles } from "../game/daily";
@@ -32,7 +32,7 @@ export function HomeScreen({
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.screen}>
+      <ScrollView style={styles.screen}>
         <View style={styles.header}>
           <Text style={styles.eyebrow}>WORD LADDER</Text>
           <Text style={styles.title}>Find your next word.</Text>
@@ -123,7 +123,7 @@ export function HomeScreen({
             onPress={() => {}}
           />
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     paddingHorizontal: 24,
+    paddingBottom: 100,
   },
   header: {
     paddingTop: 48,
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
   },
   section: {
     gap: 14,
+    paddingBottom: 30,
   },
   dailySection: {
     gap: 14,

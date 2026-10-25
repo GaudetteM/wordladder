@@ -30,20 +30,22 @@ export default function PuzzleCard({
           ? "★"
           : null;
 
-  const medalStyle =
+  const starStyle =
     medal === "gold"
       ? styles.goldStars
       : medal === "silver"
         ? styles.silverStars
         : styles.bronzeStars;
 
+  const statusLabel = result?.completed
+    ? `completed${stars ? `, ${stars.length} stars` : ""}`
+    : "not completed";
+
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel={`Puzzle ${index + 1}: ${puzzle.start} to ${puzzle.target}, ${puzzle.difficulty}${
-        result?.completed ? ", completed" : ", not completed"
-      }`}
+      accessibilityLabel={`Puzzle ${index + 1}: ${puzzle.start} to ${puzzle.target}, ${statusLabel}`}
       style={({ pressed }) => [
         styles.card,
         { width },
@@ -55,42 +57,24 @@ export default function PuzzleCard({
           {String(index + 1).padStart(2, "0")}
         </Text>
 
-        <View style={styles.result}>
-          {stars ? (
-            <Text style={[styles.stars, medalStyle]}>{stars}</Text>
-          ) : result?.completed ? (
-            <Text style={styles.completedMark}>✓</Text>
-          ) : (
-            <Text style={styles.uncompletedMark}>○</Text>
-          )}
-        </View>
+        {stars ? (
+          <Text style={[styles.stars, starStyle]}>{stars}</Text>
+        ) : result?.completed ? (
+          <Text style={styles.completedMark}>✓</Text>
+        ) : (
+          <Text style={styles.uncompletedMark}>○</Text>
+        )}
       </View>
 
       <View style={styles.words}>
         <Text style={styles.startWord} numberOfLines={1} adjustsFontSizeToFit>
           {puzzle.start}
         </Text>
+
         <Text style={styles.arrow}>↓</Text>
+
         <Text style={styles.targetWord} numberOfLines={1} adjustsFontSizeToFit>
           {puzzle.target}
-        </Text>
-      </View>
-
-      <View style={styles.cardBottom}>
-        <Text
-          style={[
-            styles.difficulty,
-            puzzle.difficulty === "easy" && styles.easyText,
-            puzzle.difficulty === "medium" && styles.mediumText,
-            puzzle.difficulty === "hard" && styles.hardText,
-          ]}
-          numberOfLines={1}
-        >
-          {puzzle.difficulty.toUpperCase()}
-        </Text>
-
-        <Text style={styles.moves} numberOfLines={1}>
-          {puzzle.expectedMoves} moves
         </Text>
       </View>
     </Pressable>
@@ -99,38 +83,33 @@ export default function PuzzleCard({
 
 const styles = StyleSheet.create({
   card: {
-    minHeight: 128,
-    padding: 10,
-    borderRadius: 13,
+    minHeight: 132,
+    padding: 12,
+    borderRadius: 14,
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#E2E8F0",
     justifyContent: "space-between",
   },
   cardPressed: {
-    opacity: 0.7,
+    opacity: 0.75,
     backgroundColor: "#EFF6FF",
   },
   cardTop: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 2,
+    minHeight: 18,
   },
   puzzleNumber: {
     fontSize: 11,
-    fontWeight: "800",
+    fontWeight: "700",
     color: "#94A3B8",
-    letterSpacing: 0.3,
-  },
-  result: {
-    minHeight: 18,
-    alignItems: "center",
-    justifyContent: "center",
+    letterSpacing: 0.5,
   },
   stars: {
     fontSize: 12,
-    fontWeight: "900",
+    fontWeight: "800",
     letterSpacing: -1,
   },
   goldStars: {
@@ -152,58 +131,31 @@ const styles = StyleSheet.create({
     color: "#CBD5E1",
   },
   words: {
-    alignItems: "flex-start",
-    gap: 0,
-    paddingVertical: 6,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    gap: 2,
   },
   startWord: {
     maxWidth: "100%",
-    fontSize: 20,
-    fontWeight: "500",
-    letterSpacing: 0.2,
+    fontSize: 17,
+    fontWeight: "600",
+    letterSpacing: 0.3,
     color: "#0F172A",
+    textAlign: "center",
   },
   arrow: {
-    fontSize: 12,
-    lineHeight: 15,
-    color: "#477BDB",
+    fontSize: 14,
+    lineHeight: 18,
+    color: "#94A3B8",
   },
   targetWord: {
     maxWidth: "100%",
     fontSize: 17,
-    fontWeight: "500",
-    letterSpacing: 0.2,
-    color: "#477BDB",
-  },
-  cardBottom: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 3,
-  },
-  difficulty: {
-    flexShrink: 1,
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 0.3,
-    color: "#64748B",
-  },
-  moves: {
-    flexShrink: 0,
-    fontSize: 9,
     fontWeight: "600",
-    color: "#94A3B8",
-  },
-  easyText: {
-    color: "#16A34A",
-  },
-  mediumText: {
-    color: "#D97706",
-  },
-  hardText: {
-    color: "#DC2626",
-  },
-  brutalText: {
-    color: "#7C3AED",
+    letterSpacing: 0.3,
+    color: "#477BDB",
+    textAlign: "center",
   },
 });
