@@ -70,6 +70,7 @@ export function GameScreen({
   function handleLetterPress(index: number) {
     if (won) return;
 
+    setDraft(previousWord);
     setSelectedIndex(index);
     setMessage("Choose a replacement letter.");
   }
