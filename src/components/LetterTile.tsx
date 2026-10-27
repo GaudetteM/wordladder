@@ -95,31 +95,33 @@ export function LetterTile({
 
   return (
     <Animated.View
-      style={[styles.tileWrapper, animatedStyle]}
-      entering={changed ? ZoomIn.duration(240).springify() : undefined}
+      entering={changed ? ZoomIn.duration(180).springify() : undefined}
+      style={styles.tileWrapper}
     >
-      <AnimatedPressable
-        onPress={() => {
-          if (!editable) return;
-          void Haptics.selectionAsync();
-          onPress?.();
-        }}
-        disabled={!editable}
-        accessibilityRole={editable ? "button" : "text"}
-        accessibilityLabel={
-          editable ? `Change letter ${letter}` : `Letter ${letter}`
-        }
-        accessibilityState={editable ? { selected } : undefined}
-        style={[
-          styles.tile,
-          editable && styles.editable,
-          changed && styles.changed,
-          selected && styles.selected,
-          celebrating && celebrationStyle,
-        ]}
-      >
-        <Text style={styles.letter}>{letter}</Text>
-      </AnimatedPressable>
+      <Animated.View style={animatedStyle}>
+        <AnimatedPressable
+          onPress={() => {
+            if (!editable) return;
+            void Haptics.selectionAsync();
+            onPress?.();
+          }}
+          disabled={!editable}
+          accessibilityRole={editable ? "button" : "text"}
+          accessibilityLabel={
+            editable ? `Change letter ${letter}` : `Letter ${letter}`
+          }
+          accessibilityState={editable ? { selected } : undefined}
+          style={[
+            styles.tile,
+            editable && styles.editable,
+            changed && styles.changed,
+            selected && styles.selected,
+            celebrating && celebrationStyle,
+          ]}
+        >
+          <Text style={styles.letter}>{letter}</Text>
+        </AnimatedPressable>
+      </Animated.View>
     </Animated.View>
   );
 }

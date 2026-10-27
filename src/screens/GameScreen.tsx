@@ -1,17 +1,24 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import Animated, { ZoomIn } from "react-native-reanimated";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 
 import { WordRow } from "../components/WordRow";
 import { LetterPicker } from "../components/LetterPicker";
+import { CompletionCelebration } from "../components/CompletionCelebration";
+
 import { dictionary } from "../game/dictionary";
 import { validateWord } from "../game/validation";
 import type { Puzzle } from "../game/types";
 import { calculateScore } from "../game/scoring";
-import { savePuzzleCompletion } from "../game/progress";
+
+import {
+  getProgress,
+  savePuzzleCompletion,
+  type PuzzleProgress,
+} from "../game/progress";
 
 type GameScreenProps = {
   puzzle: Puzzle;
@@ -30,6 +37,9 @@ export function GameScreen({
   const [draft, setDraft] = useState(puzzle.start);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("Tap a letter to change it.");
+  const [personalBest, setPersonalBest] = useState<PuzzleProgress | null>(null);
+
+  const savedPuzzleId = progressId ?? puzzle.id;
 
   const scrollRef = useRef<React.ElementRef<typeof ScrollView>>(null);
   const shouldScrollRef = useRef(false);
@@ -39,8 +49,23 @@ export function GameScreen({
   const moves = words.length - 1;
   const won = previousWord === puzzle.target;
   const validation = validateWord(previousWord, draft, dictionary);
-
   const score = won ? calculateScore(moves, puzzle.expectedMoves) : null;
+
+  useEffect(() => {
+    let active = true;
+
+    setPersonalBest(null);
+
+    getProgress().then((progress) => {
+      if (active) {
+        setPersonalBest(progress[savedPuzzleId] ?? null);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [savedPuzzleId]);
 
   function handleLetterPress(index: number) {
     if (won) return;
@@ -93,12 +118,14 @@ export function GameScreen({
     if (nextWord === puzzle.target) {
       const finalScore = calculateScore(moves + 1, puzzle.expectedMoves);
 
-      pendingSave.current = savePuzzleCompletion(
-        progressId ?? puzzle.id,
-        finalScore,
-      ).catch((error) => {
-        console.error("Failed to save puzzle completion:", error);
-      });
+      pendingSave.current = savePuzzleCompletion(savedPuzzleId, finalScore)
+        .then(() => getProgress())
+        .then((progress) => {
+          setPersonalBest(progress[savedPuzzleId] ?? null);
+        })
+        .catch((error) => {
+          console.error("Failed to save puzzle completion:", error);
+        });
 
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setMessage("Puzzle complete!");
@@ -150,10 +177,6 @@ export function GameScreen({
           </Pressable>
 
           <Text style={styles.title}>Puzzle {puzzle.id.split("-").pop()}</Text>
-
-          <Text style={styles.moveCount}>
-            {moves} {moves === 1 ? "move" : "moves"}
-          </Text>
         </View>
 
         <ScrollView
@@ -190,32 +213,36 @@ export function GameScreen({
 
         <View style={styles.goalContainer}>
           <Text style={styles.goalLabel}>YOUR GOAL</Text>
+
           <WordRow word={puzzle.target} animate={false} celebrating={won} />
+
+          <View style={styles.goalStats}>
+            <Text style={styles.goalStat}>
+              Moves <Text style={styles.goalStatValue}>{moves}</Text>
+            </Text>
+
+            <Text style={styles.goalStatSeparator}>·</Text>
+
+            <Text style={styles.goalStat}>
+              Par{" "}
+              <Text style={styles.goalStatValue}>{puzzle.expectedMoves}</Text>
+            </Text>
+
+            <Text style={styles.goalStatSeparator}>·</Text>
+
+            <Text style={styles.goalStat}>
+              Best{" "}
+              <Text style={[styles.goalStatValue, styles.goalBestValue]}>
+                {personalBest?.bestMoves ?? "—"}
+              </Text>
+            </Text>
+          </View>
         </View>
 
-        {won && score && (
-          <Animated.View
-            entering={ZoomIn.duration(350).springify()}
-            style={styles.result}
-          >
-            <Text style={styles.resultTitle}>Puzzle Complete!</Text>
-
-            <Text style={styles.resultSubtitle}>
-              {score.moves} moves · {puzzle.expectedMoves} expected
-            </Text>
-
-            <Text style={styles.resultEfficiency}>
-              {score.extraMoves === 0
-                ? "Perfect!"
-                : `+${score.extraMoves} extra ${
-                    score.extraMoves === 1 ? "move" : "moves"
-                  }`}
-            </Text>
-          </Animated.View>
-        )}
-
         <View style={styles.controls}>
-          {!won && (
+          {won && score ? (
+            <CompletionCelebration score={score} />
+          ) : (
             <>
               <Text style={styles.message} accessibilityLiveRegion="polite">
                 {message}
@@ -314,12 +341,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#0F172A",
   },
-  moveCount: {
-    marginTop: 4,
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#64748B",
-  },
   scroll: {
     flex: 1,
   },
@@ -333,37 +354,40 @@ const styles = StyleSheet.create({
   },
   goalContainer: {
     alignItems: "center",
-    paddingVertical: 16,
-    gap: 10,
+    paddingTop: 12,
+    paddingBottom: 10,
+    gap: 8,
     backgroundColor: "#F1F5F9",
     borderTopWidth: 1,
     borderTopColor: "#E2E8F0",
+  },
+  goalStats: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    marginTop: 2,
+  },
+  goalStat: {
+    fontSize: 12,
+    color: "#64748B",
+  },
+  goalStatValue: {
+    fontWeight: "700",
+    color: "#0F172A",
+  },
+  goalBestValue: {
+    color: "#477BDB",
+  },
+  goalStatSeparator: {
+    fontSize: 12,
+    color: "#CBD5E1",
   },
   goalLabel: {
     fontSize: 11,
     fontWeight: "700",
     letterSpacing: 1.5,
     color: "#64748B",
-  },
-  result: {
-    alignItems: "center",
-    paddingVertical: 18,
-    gap: 6,
-    backgroundColor: "#FFFFFF",
-  },
-  resultTitle: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#0F172A",
-  },
-  resultSubtitle: {
-    fontSize: 14,
-    color: "#64748B",
-  },
-  resultEfficiency: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#477BDB",
   },
   controls: {
     paddingHorizontal: 16,

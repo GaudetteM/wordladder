@@ -1,24 +1,6 @@
 [
   {
     "id": "challenge-001",
-    "start": "THAT",
-    "target": "FREE",
-    "expectedMoves": 5,
-    "difficulty": "hard",
-    "route": [
-      "THAT",
-      "THAN",
-      "THEN",
-      "THEE",
-      "TREE",
-      "FREE"
-    ],
-    "averageWordFrequency": 5.62,
-    "weakestWordFrequency": 4.04,
-    "score": 5.901
-  },
-  {
-    "id": "challenge-002",
     "start": "THINK",
     "target": "GOING",
     "expectedMoves": 5,
@@ -36,175 +18,25 @@
     "score": 5.569
   },
   {
+    "id": "challenge-002",
+    "start": "THAT",
+    "target": "FREE",
+    "expectedMoves": 5,
+    "difficulty": "hard",
+    "route": [
+      "THAT",
+      "THAN",
+      "THEN",
+      "THEE",
+      "TREE",
+      "FREE"
+    ],
+    "averageWordFrequency": 5.62,
+    "weakestWordFrequency": 4.04,
+    "score": 5.901
+  },
+  {
     "id": "challenge-003",
-    "start": "COURT",
-    "target": "COULD",
-    "expectedMoves": 6,
-    "difficulty": "hard",
-    "route": [
-      "COURT",
-      "COUNT",
-      "MOUNT",
-      "MOUND",
-      "WOUND",
-      "WOULD",
-      "COULD"
-    ],
-    "averageWordFrequency": 4.98,
-    "weakestWordFrequency": 3.6,
-    "score": 5.284
-  },
-  {
-    "id": "challenge-004",
-    "start": "THING",
-    "target": "TRADE",
-    "expectedMoves": 6,
-    "difficulty": "hard",
-    "route": [
-      "THING",
-      "THINK",
-      "THICK",
-      "TRICK",
-      "TRACK",
-      "TRACE",
-      "TRADE"
-    ],
-    "averageWordFrequency": 5.01,
-    "weakestWordFrequency": 4.19,
-    "score": 5.174
-  },
-  {
-    "id": "challenge-005",
-    "start": "STRONG",
-    "target": "PAYING",
-    "expectedMoves": 5,
-    "difficulty": "hard",
-    "route": [
-      "STRONG",
-      "STRING",
-      "SPRING",
-      "SPYING",
-      "SAYING",
-      "PAYING"
-    ],
-    "averageWordFrequency": 4.72,
-    "weakestWordFrequency": 3.65,
-    "score": 4.825
-  },
-  {
-    "id": "challenge-006",
-    "start": "EASIER",
-    "target": "LETTER",
-    "expectedMoves": 5,
-    "difficulty": "hard",
-    "route": [
-      "EASIER",
-      "EASTER",
-      "MASTER",
-      "MATTER",
-      "LATTER",
-      "LETTER"
-    ],
-    "averageWordFrequency": 4.78,
-    "weakestWordFrequency": 4.12,
-    "score": 4.812
-  },
-  {
-    "id": "challenge-007",
-    "start": "FATHER",
-    "target": "POSTED",
-    "expectedMoves": 5,
-    "difficulty": "hard",
-    "route": [
-      "FATHER",
-      "FATTER",
-      "FASTER",
-      "FOSTER",
-      "POSTER",
-      "POSTED"
-    ],
-    "averageWordFrequency": 4.41,
-    "weakestWordFrequency": 3.06,
-    "score": 4.691
-  },
-  {
-    "id": "challenge-008",
-    "start": "THOSE",
-    "target": "AMONG",
-    "expectedMoves": 6,
-    "difficulty": "hard",
-    "route": [
-      "THOSE",
-      "CHOSE",
-      "CLOSE",
-      "CLONE",
-      "ALONE",
-      "ALONG",
-      "AMONG"
-    ],
-    "averageWordFrequency": 5.05,
-    "weakestWordFrequency": 3.68,
-    "score": 5.271
-  },
-  {
-    "id": "challenge-009",
-    "start": "LIKE",
-    "target": "GOOD",
-    "expectedMoves": 6,
-    "difficulty": "hard",
-    "route": [
-      "LIKE",
-      "LINE",
-      "FINE",
-      "FIND",
-      "FOND",
-      "FOOD",
-      "GOOD"
-    ],
-    "averageWordFrequency": 5.47,
-    "weakestWordFrequency": 3.89,
-    "score": 5.789
-  },
-  {
-    "id": "challenge-010",
-    "start": "STATUS",
-    "target": "SCORED",
-    "expectedMoves": 5,
-    "difficulty": "hard",
-    "route": [
-      "STATUS",
-      "STATES",
-      "STATED",
-      "STARED",
-      "SCARED",
-      "SCORED"
-    ],
-    "averageWordFrequency": 4.66,
-    "weakestWordFrequency": 3.6,
-    "score": 4.696
-  },
-  {
-    "id": "challenge-011",
-    "start": "THINGS",
-    "target": "STATES",
-    "expectedMoves": 7,
-    "difficulty": "brutal",
-    "route": [
-      "THINGS",
-      "THINKS",
-      "THANKS",
-      "SHANKS",
-      "SHARKS",
-      "SHARES",
-      "STARES",
-      "STATES"
-    ],
-    "averageWordFrequency": 4.54,
-    "weakestWordFrequency": 2.97,
-    "score": 4.976
-  },
-  {
-    "id": "challenge-012",
     "start": "KILLED",
     "target": "BETTER",
     "expectedMoves": 6,
@@ -223,7 +55,26 @@
     "score": 4.819
   },
   {
-    "id": "challenge-013",
+    "id": "challenge-004",
+    "start": "THOSE",
+    "target": "AMONG",
+    "expectedMoves": 6,
+    "difficulty": "hard",
+    "route": [
+      "THOSE",
+      "CHOSE",
+      "CLOSE",
+      "CLONE",
+      "ALONE",
+      "ALONG",
+      "AMONG"
+    ],
+    "averageWordFrequency": 5.05,
+    "weakestWordFrequency": 3.68,
+    "score": 5.271
+  },
+  {
+    "id": "challenge-005",
     "start": "GETTING",
     "target": "LOOKING",
     "expectedMoves": 6,
@@ -242,7 +93,250 @@
     "score": 4.769
   },
   {
+    "id": "challenge-006",
+    "start": "FATHER",
+    "target": "POSTED",
+    "expectedMoves": 5,
+    "difficulty": "hard",
+    "route": [
+      "FATHER",
+      "FATTER",
+      "FASTER",
+      "FOSTER",
+      "POSTER",
+      "POSTED"
+    ],
+    "averageWordFrequency": 4.41,
+    "weakestWordFrequency": 3.06,
+    "score": 4.691
+  },
+  {
+    "id": "challenge-007",
+    "start": "READING",
+    "target": "HITTING",
+    "expectedMoves": 6,
+    "difficulty": "brutal",
+    "route": [
+      "READING",
+      "HEADING",
+      "HEATING",
+      "SEATING",
+      "SETTING",
+      "SITTING",
+      "HITTING"
+    ],
+    "averageWordFrequency": 4.52,
+    "weakestWordFrequency": 3.77,
+    "score": 4.634
+  },
+  {
+    "id": "challenge-008",
+    "start": "COURT",
+    "target": "COULD",
+    "expectedMoves": 6,
+    "difficulty": "hard",
+    "route": [
+      "COURT",
+      "COUNT",
+      "MOUNT",
+      "MOUND",
+      "WOUND",
+      "WOULD",
+      "COULD"
+    ],
+    "averageWordFrequency": 4.98,
+    "weakestWordFrequency": 3.6,
+    "score": 5.284
+  },
+  {
+    "id": "challenge-009",
+    "start": "TALKING",
+    "target": "LEADING",
+    "expectedMoves": 6,
+    "difficulty": "brutal",
+    "route": [
+      "TALKING",
+      "TANKING",
+      "BANKING",
+      "BANDING",
+      "LANDING",
+      "LENDING",
+      "LEADING"
+    ],
+    "averageWordFrequency": 4.08,
+    "weakestWordFrequency": 2.72,
+    "score": 4.504
+  },
+  {
+    "id": "challenge-010",
+    "start": "STRONG",
+    "target": "PAYING",
+    "expectedMoves": 5,
+    "difficulty": "hard",
+    "route": [
+      "STRONG",
+      "STRING",
+      "SPRING",
+      "SPYING",
+      "SAYING",
+      "PAYING"
+    ],
+    "averageWordFrequency": 4.72,
+    "weakestWordFrequency": 3.65,
+    "score": 4.825
+  },
+  {
+    "id": "challenge-011",
+    "start": "FEELING",
+    "target": "WRITING",
+    "expectedMoves": 6,
+    "difficulty": "brutal",
+    "route": [
+      "FEELING",
+      "FELLING",
+      "FALLING",
+      "FAILING",
+      "WAILING",
+      "WAITING",
+      "WRITING"
+    ],
+    "averageWordFrequency": 4.3,
+    "weakestWordFrequency": 2.76,
+    "score": 4.619
+  },
+  {
+    "id": "challenge-012",
+    "start": "EASIER",
+    "target": "LETTER",
+    "expectedMoves": 5,
+    "difficulty": "hard",
+    "route": [
+      "EASIER",
+      "EASTER",
+      "MASTER",
+      "MATTER",
+      "LATTER",
+      "LETTER"
+    ],
+    "averageWordFrequency": 4.78,
+    "weakestWordFrequency": 4.12,
+    "score": 4.812
+  },
+  {
+    "id": "challenge-013",
+    "start": "WEARING",
+    "target": "WAITING",
+    "expectedMoves": 6,
+    "difficulty": "brutal",
+    "route": [
+      "WEARING",
+      "BEARING",
+      "BEATING",
+      "BETTING",
+      "BATTING",
+      "BAITING",
+      "WAITING"
+    ],
+    "averageWordFrequency": 4.2,
+    "weakestWordFrequency": 3.01,
+    "score": 4.503
+  },
+  {
     "id": "challenge-014",
+    "start": "THING",
+    "target": "TRADE",
+    "expectedMoves": 6,
+    "difficulty": "hard",
+    "route": [
+      "THING",
+      "THINK",
+      "THICK",
+      "TRICK",
+      "TRACK",
+      "TRACE",
+      "TRADE"
+    ],
+    "averageWordFrequency": 5.01,
+    "weakestWordFrequency": 4.19,
+    "score": 5.174
+  },
+  {
+    "id": "challenge-015",
+    "start": "KILLING",
+    "target": "HEARING",
+    "expectedMoves": 6,
+    "difficulty": "brutal",
+    "route": [
+      "KILLING",
+      "WILLING",
+      "WELLING",
+      "SELLING",
+      "SEALING",
+      "HEALING",
+      "HEARING"
+    ],
+    "averageWordFrequency": 4.24,
+    "weakestWordFrequency": 2.72,
+    "score": 4.482
+  },
+  {
+    "id": "challenge-016",
+    "start": "LIKE",
+    "target": "GOOD",
+    "expectedMoves": 6,
+    "difficulty": "hard",
+    "route": [
+      "LIKE",
+      "LINE",
+      "FINE",
+      "FIND",
+      "FOND",
+      "FOOD",
+      "GOOD"
+    ],
+    "averageWordFrequency": 5.47,
+    "weakestWordFrequency": 3.89,
+    "score": 5.789
+  },
+  {
+    "id": "challenge-017",
+    "start": "LISTEN",
+    "target": "WRITER",
+    "expectedMoves": 6,
+    "difficulty": "brutal",
+    "route": [
+      "LISTEN",
+      "LISTED",
+      "LASTED",
+      "WASTED",
+      "WAITED",
+      "WAITER",
+      "WRITER"
+    ],
+    "averageWordFrequency": 4.37,
+    "weakestWordFrequency": 3.61,
+    "score": 4.572
+  },
+  {
+    "id": "challenge-018",
+    "start": "STATUS",
+    "target": "SCORED",
+    "expectedMoves": 5,
+    "difficulty": "hard",
+    "route": [
+      "STATUS",
+      "STATES",
+      "STATED",
+      "STARED",
+      "SCARED",
+      "SCORED"
+    ],
+    "averageWordFrequency": 4.66,
+    "weakestWordFrequency": 3.6,
+    "score": 4.696
+  },
+  {
+    "id": "challenge-019",
     "start": "MORNING",
     "target": "DEALING",
     "expectedMoves": 7,
@@ -262,117 +356,23 @@
     "score": 4.673
   },
   {
-    "id": "challenge-015",
-    "start": "READING",
-    "target": "HITTING",
-    "expectedMoves": 6,
-    "difficulty": "brutal",
-    "route": [
-      "READING",
-      "HEADING",
-      "HEATING",
-      "SEATING",
-      "SETTING",
-      "SITTING",
-      "HITTING"
-    ],
-    "averageWordFrequency": 4.52,
-    "weakestWordFrequency": 3.77,
-    "score": 4.634
-  },
-  {
-    "id": "challenge-016",
-    "start": "FEELING",
-    "target": "WRITING",
-    "expectedMoves": 6,
-    "difficulty": "brutal",
-    "route": [
-      "FEELING",
-      "FELLING",
-      "FALLING",
-      "FAILING",
-      "WAILING",
-      "WAITING",
-      "WRITING"
-    ],
-    "averageWordFrequency": 4.3,
-    "weakestWordFrequency": 2.76,
-    "score": 4.619
-  },
-  {
-    "id": "challenge-017",
-    "start": "TALKING",
-    "target": "LEADING",
-    "expectedMoves": 6,
-    "difficulty": "brutal",
-    "route": [
-      "TALKING",
-      "TANKING",
-      "BANKING",
-      "BANDING",
-      "LANDING",
-      "LENDING",
-      "LEADING"
-    ],
-    "averageWordFrequency": 4.08,
-    "weakestWordFrequency": 2.72,
-    "score": 4.504
-  },
-  {
-    "id": "challenge-018",
-    "start": "WEARING",
-    "target": "WAITING",
-    "expectedMoves": 6,
-    "difficulty": "brutal",
-    "route": [
-      "WEARING",
-      "BEARING",
-      "BEATING",
-      "BETTING",
-      "BATTING",
-      "BAITING",
-      "WAITING"
-    ],
-    "averageWordFrequency": 4.2,
-    "weakestWordFrequency": 3.01,
-    "score": 4.503
-  },
-  {
-    "id": "challenge-019",
-    "start": "KILLING",
-    "target": "HEARING",
-    "expectedMoves": 6,
-    "difficulty": "brutal",
-    "route": [
-      "KILLING",
-      "WILLING",
-      "WELLING",
-      "SELLING",
-      "SEALING",
-      "HEALING",
-      "HEARING"
-    ],
-    "averageWordFrequency": 4.24,
-    "weakestWordFrequency": 2.72,
-    "score": 4.482
-  },
-  {
     "id": "challenge-020",
-    "start": "LISTEN",
-    "target": "WRITER",
-    "expectedMoves": 6,
+    "start": "THINGS",
+    "target": "STATES",
+    "expectedMoves": 7,
     "difficulty": "brutal",
     "route": [
-      "LISTEN",
-      "LISTED",
-      "LASTED",
-      "WASTED",
-      "WAITED",
-      "WAITER",
-      "WRITER"
+      "THINGS",
+      "THINKS",
+      "THANKS",
+      "SHANKS",
+      "SHARKS",
+      "SHARES",
+      "STARES",
+      "STATES"
     ],
-    "averageWordFrequency": 4.37,
-    "weakestWordFrequency": 3.61,
-    "score": 4.572
+    "averageWordFrequency": 4.54,
+    "weakestWordFrequency": 2.97,
+    "score": 4.976
   }
 ]
