@@ -38,7 +38,7 @@ export function getDailyPuzzle(dateKey: string): Puzzle | undefined {
     return undefined;
   }
 
-  return dailyPuzzles[dayIndex % dailyPuzzles.length];
+  return dailyPuzzles[dayIndex];
 }
 
 export function getRecentDailyPuzzles(today = new Date()): DailyEntry[] {
