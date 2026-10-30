@@ -22,6 +22,7 @@ import {
 
 type GameScreenProps = {
   puzzle: Puzzle;
+  title?: string;
   progressId?: string;
   onNextPuzzle?: () => void;
   onBack: () => void;
@@ -31,6 +32,7 @@ export function GameScreen({
   puzzle,
   progressId,
   onNextPuzzle,
+  title,
   onBack,
 }: GameScreenProps) {
   const [words, setWords] = useState<string[]>([puzzle.start]);
@@ -177,7 +179,9 @@ export function GameScreen({
             <Text style={styles.backText}>‹ Puzzle List</Text>
           </Pressable>
 
-          <Text style={styles.title}>Puzzle {puzzle.id.split("-").pop()}</Text>
+          <Text style={styles.title}>
+            {title ?? `Puzzle ${puzzle.id.split("-").pop()}`}
+          </Text>
         </View>
 
         <ScrollView

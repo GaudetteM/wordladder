@@ -5,8 +5,8 @@ import { HomeScreen } from "./src/screens/HomeScreen";
 import { CollectionScreen } from "./src/screens/CollectionScreen";
 import { GameScreen } from "./src/screens/GameScreen";
 import { getCollectionById, getPuzzleById } from "./src/game/catalog";
-import { getRecentDailyPuzzles } from "./src/game/daily";
 import { getDailyPuzzle } from "./src/game/daily";
+import { formatDailyDate } from "./src/utils";
 
 type Screen =
   | { name: "home" }
@@ -60,6 +60,7 @@ export default function App() {
             <GameScreen
               key={`daily-${screen.date}`}
               puzzle={puzzle}
+              title={formatDailyDate(screen.date)}
               progressId={`daily:${screen.date}`}
               onBack={() => setScreen({ name: "home" })}
             />
